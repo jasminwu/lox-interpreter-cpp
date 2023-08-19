@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up CMake
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake=3.10.0-1ubuntu1  # Install specific version
+
+      - name: Create build directory
+        run: mkdir build
+        working-directory: ${{github.workspace}}
+
+      - name: Configure project
+        run: cmake ..
+        working-directory: ${{github.workspace}}/build
+
+      - name: Build project
+        run: make
+        working-directory: ${{github.workspace}}/build
+
+      - name: Run tests
+        run: ./testapp
+        working-directory: ${{github.workspace}}

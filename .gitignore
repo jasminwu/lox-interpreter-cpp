@@ -2,7 +2,8 @@
 *.code-workspace
 .vscode/
 
-lox-interpreter-cpp
+app
+testapp
 
 # Ignore build directory
 /build/
