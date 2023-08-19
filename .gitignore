@@ -1,5 +1,25 @@
 **/.history
+*.code-workspace
+.vscode/
 
+lox-interpreter-cpp
+
+# Ignore build directory
+/build/
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore CMake generated files
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+CMakeTmp/
+CTestTestfile.cmake
+cmake_install.cmake
+install_manifest.txt
+Makefile
+CTestTestfile.cmake
 
 # Prerequisites
 *.d
