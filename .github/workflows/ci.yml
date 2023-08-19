@@ -38,5 +38,5 @@ jobs:
         working-directory: ${{github.workspace}}/build
 
       - name: Run tests
-        run: ../testapp
+        run: pwd && ../testapp
         working-directory: ${{github.workspace}}/build
