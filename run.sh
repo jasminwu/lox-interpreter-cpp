@@ -1,0 +1,1 @@
+cmake .  ; make ; ./lox-interpreter-cpp
