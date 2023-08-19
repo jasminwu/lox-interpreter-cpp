@@ -29,14 +29,11 @@ jobs:
         run: mkdir build
         working-directory: ${{github.workspace}}
 
-      - name: Configure project
-        run: cmake ..
-        working-directory: ${{github.workspace}}/build
-
-      - name: Build project
-        run: make
-        working-directory: ${{github.workspace}}/build
+      - name: Build testapp
+        run: |
+          cd ${{github.workspace}}/build
+          cmake ..
+          make testapp
 
       - name: Run tests
-        run: pwd && ../testapp
-        working-directory: ${{github.workspace}}/build
+        run: ${{github.workspace}}/build/testapp
