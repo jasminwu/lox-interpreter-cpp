@@ -13,8 +13,9 @@ file(GLOB SOURCES
 )
 
 file(GLOB TEST_SOURCES
-    test/Parser.test.cpp 
-    test/Scanner.test.cpp
+    test/Lox_test.cpp 
+    test/Parser_test.cpp 
+    test/Scanner_test.cpp
 )
 
 # Create the main executable
@@ -27,7 +28,7 @@ add_executable(app
 add_executable(testapp
     ${SOURCES}
     ${TEST_SOURCES}
-    test/main.test.cpp
+    src/main.cpp
 )
 
 enable_testing()

@@ -20,13 +20,13 @@ lox-interpreter-cpp
 ├─── include
 │    └── lox                    (contains class declarations)
 │        ├── Token.hpp
+│        ├── TokenType.hpp
 │        ├── Scanner.hpp        
 │        └── Parser.hpp
 └─── test
-     ├── catch2
-     │   └── catch.h            (the testing framework)
-     ├── Scanner.test.cpp
-     └── Parser.test.cpp
+     ├── Lox_test.cpp
+     ├── Scanner_test.cpp
+     └── Parser_test.cpp
 ```
 Everything written for the interpreter should be in the Lox namespace.
 
@@ -48,12 +48,12 @@ public:
      static void runFile(std::string source);
      static void runPrompt();
 
-     // true if an error occurs during runtime
-     static bool hadError;
-private: 
      // this calls the scanner -> parser -> interpreter
      static void run(std::string source); 
 
+     // true if an error occurs during runtime
+     static bool hadError;
+private: 
      // handles errors and error reporting
      static void error(int line, std::string message);
      static void report(int line, std::string where, std::string message);
