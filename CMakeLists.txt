@@ -1,20 +1,25 @@
-cmake_minimum_required(VERSION 3.10)  # Minimum CMake version required
+cmake_minimum_required(VERSION 3.16)  # Minimum CMake version required
 project(lox-interpreter-cpp)                   # Name of the project
+
+include_directories(include, src, test, include/lox)
 
 file(GLOB SOURCES
     "src/*.cpp"
-    "src/*.hpp"
 )
 
 file(GLOB TEST_SOURCES
-    "src/tests/*.cpp"
+    "test/*.cpp"
 )
 
 # Create the main executable
-add_executable(app ${SOURCES})
+add_executable(app 
+    ${SOURCES}
+)
 
 # Create the test executable
-add_executable(testapp ${TEST_SOURCES} ${SOURCES})
+add_executable(testapp 
+    ${TEST_SOURCES} ${SOURCES}
+)
 
 enable_testing()
 
