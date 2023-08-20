@@ -19,20 +19,21 @@ jobs:
       - name: Set up CMake
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake=3.10.0-1ubuntu1  # Install specific version
+          sudo apt-get install -y apt-transport-https ca-certificates gnupg software-properties-common
+          wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor -o /usr/share/keyrings/kitware-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
+          sudo apt-get update
+          sudo apt-get install -y cmake
 
       - name: Create build directory
         run: mkdir build
         working-directory: ${{github.workspace}}
 
-      - name: Configure project
-        run: cmake ..
-        working-directory: ${{github.workspace}}/build
-
-      - name: Build project
-        run: make
-        working-directory: ${{github.workspace}}/build
+      - name: Build testapp
+        run: |
+          cd ${{github.workspace}}/build
+          cmake ..
+          make testapp
 
       - name: Run tests
-        run: ./testapp
-        working-directory: ${{github.workspace}}
+        run: ${{github.workspace}}/build/testapp
