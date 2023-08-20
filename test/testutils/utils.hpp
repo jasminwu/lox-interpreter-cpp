@@ -13,12 +13,23 @@ namespace lox
 namespace test
 {
 
-// function prototypes
-static bool TokensEqual(Token a, Token b);
+// function prototypes ////////////////////////////////////////////////////
+static bool ReturnsTrueAlways();
 static bool TokenListsEqual(std::vector<Token> a, std::vector<Token> b);
 
+// function definitions ///////////////////////////////////////////////////
+static bool ReturnsTrueAlways() {
+    return true;
+}
 
-// function definitions
+static bool TokenListsEqual(std::vector<Token> a, std::vector<Token> b) {
+    if (a.size() != b.size()) return false;
+
+    for (auto ita = a.begin(), itb = b.begin(); ita != a.end(); ++ita, ++itb) {
+        if (*ita != *itb) return false; // to be operator overloaded
+    }
+    return true;
+}
 
 }
 }
