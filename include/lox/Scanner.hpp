@@ -12,7 +12,11 @@ namespace lox {
         std::vector<lox::Token> tokens;
 
     public:
-        // Constructor
+        /**
+         * @brief Construct a new Scanner object
+         *
+         * @param source - Contents of the source file in string form
+         */
         Scanner(std::string source);
     };
 }
