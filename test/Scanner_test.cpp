@@ -1,6 +1,5 @@
 #include "catch2/catch.hpp"
 
-TEST_CASE("Does math work in Scanner_test.cpp?") {
-    CHECK((1 + 1) == 2);
-    CHECK((2 + 2) == 4);
+TEST_CASE("YOU HAVE NOT WRITTEN TESTS FOR SCANNER!!") {
+    CHECK((2 + 2) == 5);
 }

@@ -12,18 +12,21 @@ If the executable is run without an argument, then it will read user-input line 
 # File Setup
 ```
 lox-interpreter-cpp
-├─── src                        (contains class implementations and main)
-│    ├── main.cpp               ** entry point **
+├─── src                           (contains class implementations and main)
+│    ├── main.cpp                  ** entry point **
 │    ├── Token.cpp              
 │    ├── Scanner.cpp
 │    └── Parser.cpp
 ├─── include
-│    └── lox                    (contains class declarations)
+│    └── lox                       (contains class declarations)
 │        ├── Token.hpp
-│        ├── TokenType.hpp
+│        ├── TokenType.hpp         *just a very basic enum class*
 │        ├── Scanner.hpp        
 │        └── Parser.hpp
 └─── test
+│    ├── catch2                    (testing framework)
+│    │   └── catch.hpp
+     ├── tests_main.cpp            (entry point for tests)
      ├── Lox_test.cpp
      ├── Scanner_test.cpp
      └── Parser_test.cpp

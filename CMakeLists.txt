@@ -14,22 +14,22 @@ file(GLOB SOURCES
 
 file(GLOB TEST_SOURCES
     test/tests_main.cpp
-    test/intentionallyBrokenTest.cpp
+    test/AlwaysTrue.cpp
     test/Lox_test.cpp 
     test/Parser_test.cpp 
     test/Scanner_test.cpp
 )
 
+
+############## I DONT THINK YOU NEED TO MODIFY BELOW THIS LINE ################
 # Create the main executable
 add_executable(app
     ${SOURCES}
     src/main.cpp
 )
-
-# TESTING ######################################
+# TESTING 
 enable_testing()
-
-# Test Executables
+# Test Executable
 add_executable(testapp
     ${SOURCES}
     ${TEST_SOURCES}
