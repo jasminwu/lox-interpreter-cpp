@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Lox.hpp"
+#include "lox/Lox.hpp"
 
 int main() {
     std::cout << "Hello World! \n";
