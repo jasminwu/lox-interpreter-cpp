@@ -13,6 +13,8 @@ file(GLOB SOURCES
 )
 
 file(GLOB TEST_SOURCES
+    test/tests_main.cpp
+    test/intentionallyBrokenTest.cpp
     test/Lox_test.cpp 
     test/Parser_test.cpp 
     test/Scanner_test.cpp
@@ -28,20 +30,8 @@ add_executable(app
 enable_testing()
 
 # Test Executables
-add_executable(testlox
+add_executable(testapp
     ${SOURCES}
-    test/Lox_test.cpp
+    ${TEST_SOURCES}
 )
-add_test(NAME Lox_Test COMMAND testlox)
-
-add_executable(testscanner
-    ${SOURCES}
-    test/Scanner_test.cpp
-)
-add_test(NAME Scanner_Test COMMAND testscanner)
-
-add_executable(testparser
-    ${SOURCES}
-    test/Parser_test.cpp
-)
-add_test(NAME Parser_Test COMMAND testparser)
+add_test(NAME COMPLETE_TEST COMMAND testapp)
