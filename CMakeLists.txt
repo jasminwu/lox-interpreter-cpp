@@ -28,20 +28,20 @@ add_executable(app
 enable_testing()
 
 # Test Executables
-add_executable(Lox_test
+add_executable(testlox
     ${SOURCES}
     test/Lox_test.cpp
 )
-add_test(NAME Lox_test COMMAND Lox_test)
+add_test(NAME Lox_Test COMMAND testlox)
 
-add_executable(Scanner_test
+add_executable(testscanner
     ${SOURCES}
     test/Scanner_test.cpp
 )
-add_test(NAME Scanner_test COMMAND Scanner_test)
+add_test(NAME Scanner_Test COMMAND testscanner)
 
-add_executable(Parser_test
+add_executable(testparser
     ${SOURCES}
-    test/Scanner_test.cpp
+    test/Parser_test.cpp
 )
-add_test(NAME Parser_test COMMAND Parser_test)
+add_test(NAME Parser_Test COMMAND testparser)
