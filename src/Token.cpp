@@ -9,4 +9,15 @@ namespace lox {
 
     std::string Token::toString() { return ""; }
 
+    // Operator Overload Implementations
+    bool operator==(Token const a, Token const b) {
+        return a.lexeme_ == b.lexeme_ &&
+        a.line_ == b.line_ &&
+        a.type_ == b.type_;
+    }
+
+    bool operator!=(Token const a, Token const b) {
+        return !(a == b);
+    }
+
 }
