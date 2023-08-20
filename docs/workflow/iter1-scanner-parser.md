@@ -24,8 +24,10 @@ lox-interpreter-cpp
 │        ├── Scanner.hpp        
 │        └── Parser.hpp
 └─── test
-│    ├── catch2                    (testing framework)
-│    │   └── catch.hpp
+     ├── catch2                    (testing framework)
+     │   └── catch.hpp
+     ├── testutils                 (utility functions for testing)
+     │   └── utils.hpp             
      ├── tests_main.cpp            (entry point for tests)
      ├── Lox_test.cpp
      ├── Scanner_test.cpp
@@ -109,6 +111,7 @@ private:
 ```
 
 ## Parser
+We can deal with this one later
 
 ## Interpreter
 We will deal with the rest in iteration 2.

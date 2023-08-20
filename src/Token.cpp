@@ -1,6 +1,7 @@
-#include "../include/lox/Token.hpp"
+#include <string>
 
-#include "../include/lox/TokenType.hpp"
+#include "lox/Token.hpp"
+#include "lox/TokenType.hpp"
 
 namespace lox {
     Token::Token(lox::TokenType type, std::string lexeme, std::any literal,

@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 
 #include "lox/Lox.hpp"
 #include "lox/Scanner.hpp"
