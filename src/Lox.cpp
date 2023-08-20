@@ -9,7 +9,7 @@
 namespace lox 
 {
 
-void Lox::runFile(std::string source) {
+void Lox::runFile(std::string path) {
     return;
 }
 

@@ -1,4 +1,4 @@
-#define TEST_INCLUDE 69
+#pragma once
 
 #include <string>
 
@@ -15,40 +15,40 @@ public:
     static bool hadError_;
 
     /**
-     * @brief
+     * @brief runs a lox source file
      * 
-     * @param source 
+     * @param path path to the source file
      */
-    static void runFile(std::string source);
+    static void runFile(std::string path);
 
     /**
-     * @brief 
+     * @brief begins a command prompt loop
      * 
      */
     static void runPrompt();
 
     /**
-     * @brief 
+     * @brief runs source code
      * 
-     * @param source 
+     * @param source source code
      */
     static void run(std::string source);
 
 private:
     /**
-     * @brief 
+     * @brief reports an error by given a line number, and an error message
      * 
-     * @param line 
-     * @param message 
+     * @param line line number
+     * @param message error message
      */
     static void error(int line, std::string message);
 
     /**
-     * @brief 
+     * @brief reports an error given a line number, idk yet, and a message
      * 
-     * @param line 
-     * @param where 
-     * @param message 
+     * @param line line number
+     * @param where idk yet
+     * @param message error message
      */
     static void report(int line, std::string where, std::string message);
 };
