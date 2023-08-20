@@ -24,15 +24,24 @@ add_executable(app
     src/main.cpp
 )
 
-# Create the test executable
-add_executable(testapp
-    ${SOURCES}
-    ${TEST_SOURCES}
-    src/main.cpp
-)
-
+# TESTING ######################################
 enable_testing()
 
-# Add tests
-add_test(NAME MyTest COMMAND testapp)
+# Test Executables
+add_executable(Lox_test
+    ${SOURCES}
+    test/Lox_test.cpp
+)
+add_test(NAME Lox_test COMMAND Lox_test)
 
+add_executable(Scanner_test
+    ${SOURCES}
+    test/Scanner_test.cpp
+)
+add_test(NAME Scanner_test COMMAND Scanner_test)
+
+add_executable(Parser_test
+    ${SOURCES}
+    test/Scanner_test.cpp
+)
+add_test(NAME Parser_test COMMAND Parser_test)

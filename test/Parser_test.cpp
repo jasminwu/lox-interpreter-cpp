@@ -5,3 +5,7 @@
 auto testTokens1 = new std::vector<Token>();
 testTokens.push_back(Token(LEFT_PAREN, "(", NULL, 0));
 */
+
+int main () {
+    return 1;
+}
