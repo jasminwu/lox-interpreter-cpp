@@ -1,7 +1,7 @@
 #pragma once
 
-#include <any>
 #include <string>
+#include <variant>
 
 #include "TokenType.hpp"
 
@@ -12,7 +12,7 @@ class Token {
 public:
     lox::TokenType type_;
     std::string lexeme_;
-    std::any literal_;
+    std::variant<int, double, std::string> literal_;
     int line_;
 
     /**
@@ -23,7 +23,7 @@ public:
      * @param literal
      * @param line
      */
-    Token(lox::TokenType type, std::string lexeme, std::any literal,
+    Token(lox::TokenType type, std::string lexeme, std::variant<int, double, std::string> literal,
             int line);
 
     /**
