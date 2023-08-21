@@ -14,17 +14,20 @@ TEST_CASE("YOU HAVE NOT WRITTEN TESTS FOR SCANNER!!") { CHECK((2 + 2) == 4); }
 TEST_CASE("Correctly scans a simple hello world program") {
     std::string source = "print \"Hello, world!\";";
 
+    // get the received token list
+    auto scannerObj = lox::Scanner(source);
+    auto received = scannerObj.scanTokens();
+
     // build the expected token list
     auto expected = std::vector<lox::Token>();
 
     // manually creating the token list using initialiser lists
-    /*
     expected.push_back({
-        PRINT,
+        lox::TokenType::PRINT,  
         "print",
-        SOMETHING IDK,
+        {}, // default initialises the variant to monostate
         1
     });
-    */
-   CHECK(1 == 1);
+
+   CHECK(TokenListsEqual(expected, received));
 }
