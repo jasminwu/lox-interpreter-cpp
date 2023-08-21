@@ -9,9 +9,14 @@
 #include "catch2/catch.hpp"
 #include "testutils/utils.hpp"
 
-TEST_CASE("YOU HAVE NOT WRITTEN TESTS FOR SCANNER!!") { CHECK((2 + 2) == 4); }
+TEST_CASE("Sanity Check: empty vectors are equal") {
+    auto received = std::vector<lox::Token>();
+    auto expected = std::vector<lox::Token>();
 
-TEST_CASE("Correctly scans a simple hello world program") {
+   CHECK(lox::test::TokenListsEqual(expected, received));
+}
+
+TEST_CASE("Print statement with string literal") {
     std::string source = "print \"Hello, world!\";";
 
     // get the received token list
@@ -38,6 +43,41 @@ TEST_CASE("Correctly scans a simple hello world program") {
         lox::TokenType::SEMICOLON,  
         ";",
         std::monostate(),
+        3
+    });
+
+   CHECK(lox::test::TokenListsEqual(expected, received));
+}
+
+TEST_CASE("Variable declaration and initialisation") {
+    std::string source = "var Jack = 10;";
+
+    auto scannerObj = lox::Scanner(source);
+    auto received = scannerObj.scanTokens();
+    auto expected = std::vector<lox::Token>();
+
+    expected.push_back({
+        lox::TokenType::VAR,  
+        "var",
+        std::monostate(),
+        1
+    });
+    expected.push_back({
+        lox::TokenType::IDENTIFIER,  
+        "Jack",
+        std::monostate(),
+        2
+    });
+    expected.push_back({
+        lox::TokenType::EQUAL,  
+        "=",
+        std::monostate(),
+        3
+    });
+    expected.push_back({
+        lox::TokenType::NUMBER,  
+        "10",
+        10,
         3
     });
 
