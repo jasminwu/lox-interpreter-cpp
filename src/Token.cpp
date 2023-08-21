@@ -1,10 +1,11 @@
 #include <string>
+#include <variant>
 
 #include "lox/Token.hpp"
 #include "lox/TokenType.hpp"
 
 namespace lox {
-    Token::Token(lox::TokenType type, std::string lexeme, std::any literal,
+    Token::Token(lox::TokenType type, std::string lexeme, std::variant<int, double, std::string> literal,
                  int line)
         : type_(type), lexeme_(lexeme), literal_(literal), line_(line){};
 
