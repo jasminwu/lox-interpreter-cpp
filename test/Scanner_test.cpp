@@ -25,9 +25,21 @@ TEST_CASE("Correctly scans a simple hello world program") {
     expected.push_back({
         lox::TokenType::PRINT,  
         "print",
-        {}, // default initialises the variant to monostate
+        std::monostate(),
         1
     });
+    expected.push_back({
+        lox::TokenType::STRING,  
+        "\"Hello, world!\"",
+        "Hello, world!",
+        2
+    });
+    expected.push_back({
+        lox::TokenType::SEMICOLON,  
+        ";",
+        std::monostate(),
+        3
+    });
 
-   CHECK(TokenListsEqual(expected, received));
+   CHECK(lox::test::TokenListsEqual(expected, received));
 }
