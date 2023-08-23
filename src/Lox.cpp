@@ -57,7 +57,7 @@ void Lox::error(int line, std::string message) {
 }
 
 void Lox::report(int line, std::string where, std::string message) {
-    cerr << red_f << "[line " << line << "] Error" << where << ": "  << message << white_f;
+    std::cerr << red_f << "[line " << line << "] Error" << where << ": "  << message << white_f;
 }
 
 }
