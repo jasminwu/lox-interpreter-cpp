@@ -26,10 +26,13 @@ int main(int argc, char **argv) {
 }
 
 void printGreeting() {
+    // PROJECT NAME
     std::cerr << bold <<
     red_f << "L" << yellow_f << "O" << green_f << "X " << cyan_f << "I" << blue_f << "N" << mag_f << "T" << 
     red_f << "E" << yellow_f << "R" << green_f << "P"  << cyan_f << "R" << blue_f << "E" << mag_f << "T" <<
     red_f << "E" << yellow_f << "R" << reset << white_f << " - iteration 1\n";
+
+    // CONTRIBUTORS
     std::cerr << blue_f << "by " << green_f << bold << "Jasmin" <<
     reset << blue_f << " and " << green_f << bold << "Jeff\n" << reset << white_f;
 }
