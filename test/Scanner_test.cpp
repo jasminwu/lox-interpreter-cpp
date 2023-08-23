@@ -279,3 +279,45 @@ TEST_CASE("Negative numbers") {
 
    CHECK(lox::test::TokenListsEqual(expected, received));
 }
+
+TEST_CASE("Equality of negative numbers") {
+    
+    std::string source = "4 == -6.9;";
+
+    auto scannerObj = lox::Scanner(source);
+    auto received = scannerObj.scanTokens();
+    auto expected = std::vector<lox::Token>();
+
+    expected.push_back({
+        lox::TokenType::IDENTIFIER,  
+        "4",
+        4,
+        1
+    });
+    expected.push_back({
+        lox::TokenType::EQUAL_EQUAL,  
+        "==",
+        std::monostate(),
+        1
+    });
+    expected.push_back({
+        lox::TokenType::MINUS,  
+        "-",
+        std::monostate(),
+        1
+    });
+    expected.push_back({
+        lox::TokenType::NUMBER,  
+        "6.9",
+        6.9,
+        1
+    });
+    expected.push_back({
+        lox::TokenType::SEMICOLON,  
+        ";",
+        std::monostate(),
+        1
+    });
+
+   CHECK(lox::test::TokenListsEqual(expected, received));
+}
