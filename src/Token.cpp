@@ -9,7 +9,7 @@ namespace lox {
                  int line)
         : type_(type), lexeme_(lexeme), literal_(literal), line_(line){};
 
-    std::string Token::toString() { return ""; }
+    std::string Token::toString() { return "hi"; }
 
     // Operator Overload Implementations
     bool operator==(Token const a, Token const b) {

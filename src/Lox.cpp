@@ -53,11 +53,11 @@ void Lox::run(std::string source) {
 }
 
 void Lox::error(int line, std::string message) {
-    return;
+    report(line, "", message);
 }
 
 void Lox::report(int line, std::string where, std::string message) {
-    return;
+    cerr << red_f << "[line " << line << "] Error" << where << ": "  << message << white_f;
 }
 
 }
