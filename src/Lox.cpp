@@ -1,4 +1,7 @@
+#include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
 
 #include "lox/Lox.hpp"
 #include "lox/Scanner.hpp"
@@ -6,11 +9,18 @@
 #include "lox/TokenType.hpp"
 #include "lox/Parser.hpp"   
 
+#include "color/colormod.hpp"
+#include "color/color.hpp"
+
 namespace lox 
 {
 
 void Lox::runFile(std::string path) {
-    return;
+    std::ifstream inputFile(path);
+    std::stringstream buffer;
+    buffer << inputFile.rdbuf();
+    run(buffer.str());
+    inputFile.close();
 }
 
 void Lox::runPrompt() {
@@ -18,6 +28,13 @@ void Lox::runPrompt() {
 }
 
 void Lox::run(std::string source) {
+    // currently just prints the source to ensure that it is currectly inputted
+    std::cerr << lgray_f << "Printing source code:\n";
+    std::cerr << dgray_f << source;
+    std::cerr << lgray_f << "\nEnd of printing source code\n" << reset;
+
+    // TODO: Run the source code
+
     return;
 }
 

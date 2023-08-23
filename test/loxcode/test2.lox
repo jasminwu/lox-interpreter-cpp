@@ -1,0 +1,5 @@
+// Hello there this is a comment
+print "hello world";
+var a = 6.9;
+var squared = a * a;
+print squared;
