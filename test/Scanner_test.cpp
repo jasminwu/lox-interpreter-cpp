@@ -289,7 +289,7 @@ TEST_CASE("Equality of negative numbers") {
     auto expected = std::vector<lox::Token>();
 
     expected.push_back({
-        lox::TokenType::IDENTIFIER,  
+        lox::TokenType::NUMBER,  
         "4",
         4,
         1
@@ -317,6 +317,36 @@ TEST_CASE("Equality of negative numbers") {
         ";",
         std::monostate(),
         1
+    });
+
+   CHECK(lox::test::TokenListsEqual(expected, received));
+}
+
+TEST_CASE("bang equal identifier then bang") {
+    
+    std::string source = "!=abc \n\n !";
+
+    auto scannerObj = lox::Scanner(source);
+    auto received = scannerObj.scanTokens();
+    auto expected = std::vector<lox::Token>();
+
+    expected.push_back({
+        lox::TokenType::BANG_EQUAL,  
+        "!=",
+        std::monostate(),
+        1
+    });
+    expected.push_back({
+        lox::TokenType::IDENTIFIER,  
+        "abc",
+        std::monostate(),
+        1
+    });
+    expected.push_back({
+        lox::TokenType::BANG,  
+        "!",
+        std::monostate(),
+        3
     });
 
    CHECK(lox::test::TokenListsEqual(expected, received));
