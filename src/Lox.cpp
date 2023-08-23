@@ -15,35 +15,49 @@
 namespace lox 
 {
 
+bool Lox::hadError_ = false;
+
 void Lox::runFile(std::string path) {
     std::ifstream inputFile(path);
     std::stringstream buffer;
     buffer << inputFile.rdbuf();
     run(buffer.str());
     inputFile.close();
+
+    if (hadError_) {
+        exit(1);
+    }
 }
 
 void Lox::runPrompt() {
-    return;
+    while (true) {
+        std::string line;
+        std::cout << "> ";
+        std::cin >> line;
+        run(line);
+        hadError_ = false;
+    }
 }
 
 void Lox::run(std::string source) {
-    // currently just prints the source to ensure that it is currectly inputted
-    std::cerr << lgray_f << "Printing source code:\n";
-    std::cerr << dgray_f << source;
-    std::cerr << lgray_f << "\nEnd of printing source code\n" << reset;
+    auto scanner = Scanner(source);
+    auto tokens = scanner.scanTokens();
 
-    // TODO: Run the source code
+    // for now just print out all the tokens
+    for (auto it = tokens.begin(); it != tokens.end(); ++it) {
+        auto token = *it;
+        std::cerr << yellow_f << token.toString() << "\n" << white_f;
+    }
 
     return;
 }
 
 void Lox::error(int line, std::string message) {
-    return;
+    report(line, "", message);
 }
 
 void Lox::report(int line, std::string where, std::string message) {
-    return;
+    cerr << red_f << "[line " << line << "] Error" << where << ": "  << message << white_f;
 }
 
 }
