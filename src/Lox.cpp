@@ -33,7 +33,7 @@ void Lox::runPrompt() {
     while (true) {
         std::string line;
         std::cout << "> ";
-        std::cin >> line;
+        getline(std::cin, line);
         run(line);
         hadError_ = false;
     }
