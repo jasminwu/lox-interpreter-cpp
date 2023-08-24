@@ -3,7 +3,8 @@
 #include <string>
 #include <variant>
 
-#include "TokenType.hpp"
+#include "lox/TokenType.hpp"
+#include "lox/Literal.hpp"
 
 namespace lox 
 {
@@ -12,7 +13,7 @@ class Token {
 public:
     lox::TokenType type_;
     std::string lexeme_;
-    std::variant<std::monostate, double, std::string> literal_;
+    lox::Literal literal_;
     int line_;
 
     /**
@@ -23,7 +24,7 @@ public:
      * @param literal
      * @param line
      */
-    Token(lox::TokenType type, std::string lexeme, std::variant<std::monostate, double, std::string> literal,
+    Token(lox::TokenType type, std::string lexeme, lox::Literal literal,
             int line);
 
     /**
