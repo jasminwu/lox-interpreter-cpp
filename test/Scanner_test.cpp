@@ -78,7 +78,7 @@ TEST_CASE("Variable declaration and initialisation") {
     expected.push_back({
         lox::TokenType::NUMBER,  
         "10",
-        10,
+        (double) 10,
         1
     });
     expected.push_back({
@@ -121,7 +121,7 @@ TEST_CASE("Multiple lines, plus minus multiply divide") {
     expected.push_back({
         lox::TokenType::NUMBER,  
         "10",
-        10,
+        (double) 10,
         1
     });
     expected.push_back({
@@ -147,7 +147,7 @@ TEST_CASE("Multiple lines, plus minus multiply divide") {
     expected.push_back({
         lox::TokenType::NUMBER,  
         "4.2",
-        4.2,
+        (double) 4.2,
         2
     });
     expected.push_back({
@@ -173,7 +173,7 @@ TEST_CASE("Multiple lines, plus minus multiply divide") {
     expected.push_back({
         lox::TokenType::NUMBER,  
         "2",
-        2,
+        (double) 2,
         3
     });
     expected.push_back({
@@ -225,7 +225,7 @@ TEST_CASE("Multiple lines, plus minus multiply divide") {
     expected.push_back({
         lox::TokenType::NUMBER,  
         "2",
-        2,
+        (double) 2,
         5
     });
     expected.push_back({
@@ -267,7 +267,7 @@ TEST_CASE("Negative numbers") {
     expected.push_back({
         lox::TokenType::NUMBER,  
         "6.9",
-        6.9,
+        (double) 6.9,
         1
     });
     expected.push_back({
@@ -291,7 +291,7 @@ TEST_CASE("Equality of negative numbers") {
     expected.push_back({
         lox::TokenType::NUMBER,  
         "4",
-        4,
+        (double) 4,
         1
     });
     expected.push_back({
@@ -309,7 +309,7 @@ TEST_CASE("Equality of negative numbers") {
     expected.push_back({
         lox::TokenType::NUMBER,  
         "6.9",
-        6.9,
+        (double) 6.9,
         1
     });
     expected.push_back({
