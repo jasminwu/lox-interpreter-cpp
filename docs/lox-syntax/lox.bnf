@@ -1,0 +1,21 @@
+# A REPRESENTATION OF LOX SYNTAX
+
+# STATEMENTS
+program     ::= statement* EOF;
+statement   ::= exprStmt | printStmt;
+
+exprStmt    ::= expression ";";
+printStmt   ::= "print" expression ";";
+
+# EXPRESSIONS
+expression  ::= literal | unary | binary | grouping;
+
+literal     ::= NUMBER | STRING | bool | nil;
+grouping    ::= "(" expression ")";
+unary       ::= operator_1 expression;
+binary      ::= expression operator_2 expression;
+
+# EXPRESSION TERMINALS
+bool        ::= "true" | "false";
+operator_1  ::= "-" | "!";
+operator_2  ::= "==" | "!=" | "<" | "<=" | ">" | ">=" | "+" | "-" | "*" | "/";
