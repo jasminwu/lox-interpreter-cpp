@@ -48,6 +48,6 @@ namespace lox {
         VAR,
         WHILE,
 
-        TokenEOF,
+        TOKEN_EOF,
     };
 }
