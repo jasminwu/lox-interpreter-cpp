@@ -34,7 +34,6 @@ namespace lox {
          */
         static void run(std::string source);
 
-    private:
         /**
          * @brief reports an error by given a line number, and an error message
          *
@@ -43,6 +42,7 @@ namespace lox {
          */
         static void error(int line, std::string message);
 
+    private:
         /**
          * @brief reports an error given a line number, idk yet, and a message
          *

@@ -1,6 +1,9 @@
 **/.history
 *.code-workspace
 .vscode/
+.clangformat
+
+Testing/
 
 app
 testapp

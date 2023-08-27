@@ -17,13 +17,12 @@ namespace lox {
 
         std::visit(
             [&](auto&& arg) {
-                if constexpr (std::is_same_v<decltype(arg), double>) {
-                    output_str_stream << arg;
-                } else if constexpr (std::is_same_v<decltype(arg), bool>) {
-                    output_str_stream << std::boolalpha << arg;
+                if constexpr (std::is_same_v<decltype(arg), double> ||
+                              std::is_same_v<decltype(arg), bool>) {
+                    output_str_stream << std::to_string(arg);
                 } else if constexpr (std::is_same_v<decltype(arg),
                                                     std::monostate>) {
-                    output_str_stream << "std::monostate";
+                    output_str_stream << "null";
                 } else if constexpr (std::is_same_v<decltype(arg),
                                                     std::string>) {
                     output_str_stream << arg;
@@ -45,5 +44,4 @@ namespace lox {
     }
 
     bool operator!=(Token const a, Token const b) { return !(a == b); }
-
 }
