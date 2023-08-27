@@ -1,12 +1,25 @@
-#include "../include/lox/Token.hpp"
+#include <string>
+#include <variant>
 
-#include "../include/lox/TokenType.hpp"
+#include "lox/Token.hpp"
+#include "lox/TokenType.hpp"
 
 namespace lox {
-    Token::Token(lox::TokenType type, std::string lexeme, std::any literal,
+    Token::Token(lox::TokenType type, std::string lexeme, lox::Literal literal,
                  int line)
         : type_(type), lexeme_(lexeme), literal_(literal), line_(line){};
 
-    std::string Token::toString() { return ""; }
+    std::string Token::toString() { return "hi"; }
+
+    // Operator Overload Implementations
+    bool operator==(Token const a, Token const b) {
+        return a.lexeme_ == b.lexeme_ &&
+        a.line_ == b.line_ &&
+        a.type_ == b.type_;
+    }
+
+    bool operator!=(Token const a, Token const b) {
+        return !(a == b);
+    }
 
 }

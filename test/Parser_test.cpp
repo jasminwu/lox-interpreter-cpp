@@ -7,5 +7,6 @@ testTokens.push_back(Token(LEFT_PAREN, "(", NULL, 0));
 */
 
 #include "catch2/catch.hpp"
+#include "testutils/utils.hpp"
 
 TEST_CASE("YOU HAVE NOT WRITTEN TESTS FOR PARSER!!") { CHECK((2 + 2) == 4); }
