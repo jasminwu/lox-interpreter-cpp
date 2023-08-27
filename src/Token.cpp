@@ -1,7 +1,10 @@
+#include "lox/Token.hpp"
+
+#include <sstream>
 #include <string>
 #include <variant>
+#include <vector>
 
-#include "lox/Token.hpp"
 #include "lox/TokenType.hpp"
 
 namespace lox {
@@ -9,17 +12,38 @@ namespace lox {
                  int line)
         : type_(type), lexeme_(lexeme), literal_(literal), line_(line){};
 
-    std::string Token::toString() { return "hi"; }
+    std::string Token::literalToString(const lox::Literal& literal) {
+        std::ostringstream output_str_stream;
 
-    // Operator Overload Implementations
+        std::visit(
+            [&](auto&& arg) {
+                if constexpr (std::is_same_v<decltype(arg), double>) {
+                    output_str_stream << arg;
+                } else if constexpr (std::is_same_v<decltype(arg), bool>) {
+                    output_str_stream << std::boolalpha << arg;
+                } else if constexpr (std::is_same_v<decltype(arg),
+                                                    std::monostate>) {
+                    output_str_stream << "std::monostate";
+                } else if constexpr (std::is_same_v<decltype(arg),
+                                                    std::string>) {
+                    output_str_stream << arg;
+                }
+            },
+            literal);
+
+        return output_str_stream.str();
+    }
+
+    std::string Token::toString() {
+        return tokenTypes_[type_] + " " + lexeme_ + " " +
+               literalToString(literal_);
+    }
+
     bool operator==(Token const a, Token const b) {
-        return a.lexeme_ == b.lexeme_ &&
-        a.line_ == b.line_ &&
-        a.type_ == b.type_;
+        return a.lexeme_ == b.lexeme_ && a.line_ == b.line_ &&
+               a.type_ == b.type_;
     }
 
-    bool operator!=(Token const a, Token const b) {
-        return !(a == b);
-    }
+    bool operator!=(Token const a, Token const b) { return !(a == b); }
 
 }

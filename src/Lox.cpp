@@ -71,6 +71,8 @@ namespace lox {
     void Lox::report(int line, std::string where, std::string message) {
         std::cerr << red_f << "[line " << line << "] Error" << where << ": "
                   << message << white_f;
+
+        hadError_ = true;
     }
 
 }
