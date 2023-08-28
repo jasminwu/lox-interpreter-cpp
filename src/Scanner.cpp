@@ -15,7 +15,7 @@ namespace lox {
             scanToken();
         }
 
-        std::string empty = "";
+        std::string empty = std::string("");
 
         lox::Token current_token(lox::TokenType::TOKEN_EOF, empty,
                                  std::monostate{}, line_);

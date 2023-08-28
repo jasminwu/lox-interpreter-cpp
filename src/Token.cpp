@@ -17,14 +17,14 @@ namespace lox {
 
         std::visit(
             [&](auto&& arg) {
-                if constexpr (std::is_same_v<decltype(arg), double> ||
-                              std::is_same_v<decltype(arg), bool>) {
+                using T = std::decay_t<decltype(arg)>;
+
+                if constexpr (std::is_same_v<T, double> ||
+                              std::is_same_v<T, bool>) {
                     output_str_stream << std::to_string(arg);
-                } else if constexpr (std::is_same_v<decltype(arg),
-                                                    std::monostate>) {
+                } else if constexpr (std::is_same_v<T, std::monostate>) {
                     output_str_stream << "null";
-                } else if constexpr (std::is_same_v<decltype(arg),
-                                                    std::string>) {
+                } else if constexpr (std::is_same_v<T, std::string>) {
                     output_str_stream << arg;
                 }
             },
