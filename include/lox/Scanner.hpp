@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include "Literal.hpp"
@@ -13,6 +14,16 @@ namespace lox {
     private:
         std::string source_;
         std::vector<Token> tokens;
+
+        const std::unordered_map<std::string, lox::TokenType> keywords = {
+            {"and", TokenType::AND},       {"class", TokenType::CLASS},
+            {"else", TokenType::ELSE},     {"false", TokenType::TOKEN_FALSE},
+            {"for", TokenType::FOR},       {"fun", TokenType::FUN},
+            {"if", TokenType::IF},         {"nil", TokenType::NIL},
+            {"or", TokenType::OR},         {"print", TokenType::PRINT},
+            {"return", TokenType::RETURN}, {"super", TokenType::SUPER},
+            {"this", TokenType::THIS},     {"true", TokenType::TOKEN_TRUE},
+            {"var", TokenType::VAR},       {"while", TokenType::WHILE}};
 
         int start_ = 0;
         int current_ = 0;
@@ -74,6 +85,55 @@ namespace lox {
          *
          */
         void string();
+
+        /**
+         * @brief Checks whether a char c is a digit
+         *
+         * @param c
+         * @return true
+         * @return false
+         */
+        bool isDigit(char c);
+
+        /**
+         * @brief Consumes the rest of the number literal in a similar way to
+         * how we handle strings
+         *
+         */
+        void number();
+
+        /**
+         * @brief Look ahead if current character is not the last one
+         *
+         * @return char
+         */
+        char peekNext();
+
+        /**
+         * @brief We advance to the end of the identifier and then add it as a
+         * token
+         *
+         */
+        void identifier();
+
+        /**
+         * @brief Determines whether a char is alphanumeric (is a letter or
+         * number)
+         *
+         * @param c
+         * @return true
+         * @return false
+         */
+        bool isAlphaNumeric(char c);
+
+        /**
+         * @brief
+         *
+         * @param c
+         * @return true
+         * @return false
+         */
+        bool isAlpha(char c);
 
     public:
         /**

@@ -18,7 +18,7 @@ namespace lox {
         std::string empty = std::string("");
 
         lox::Token current_token(lox::TokenType::TOKEN_EOF, empty,
-                                 std::monostate{}, line_);
+                                 std::monostate(), line_);
 
         tokens.push_back(current_token);
 
@@ -100,7 +100,13 @@ namespace lox {
             string();
             break;
         default:
-            lox::Lox::error(line_, "Unexpected character.");
+            if (isDigit(c)) {
+                number();
+            } else if (isAlpha(c)) {
+                identifier();
+            } else {
+                Lox::error(line_, "Unexpected character.");
+            }
             break;
         }
     }
@@ -108,7 +114,7 @@ namespace lox {
     char Scanner::advance() { return source_[current_++]; }
 
     void Scanner::addToken(lox::TokenType type) {
-        addToken(type, std::monostate{});
+        addToken(type, std::monostate());
     }
 
     void Scanner::addToken(lox::TokenType type, lox::Literal literal) {
@@ -152,4 +158,42 @@ namespace lox {
         addToken(lox::TokenType::STRING, value);
     }
 
+    bool Scanner::isDigit(char c) { return c >= '0' && c <= '9'; }
+
+    void Scanner::number() {
+        while (isDigit(peek())) advance();
+
+        // Look for a fractional part.
+        if (peek() == '.' && isDigit(peekNext())) {
+            // Consume the "."
+            advance();
+
+            while (isDigit(peek())) advance();
+        }
+
+        addToken(TokenType::NUMBER,
+                 std::stod(source_.substr(start_, current_ - start_)));
+    }
+
+    char Scanner::peekNext() {
+        if (current_ + 1 >= source_.length()) return '\0';
+        return source_[current_ + 1];
+    }
+
+    void Scanner::identifier() {
+        while (isAlphaNumeric(peek())) advance();
+
+        std::string text = source_.substr(start_, current_ - start_);
+        if (keywords.find(text) == keywords.end()) {
+            addToken(TokenType::IDENTIFIER);
+        } else {
+            addToken(keywords.at(text));
+        }
+    }
+
+    bool Scanner::isAlpha(char c) {
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
+    }
+
+    bool Scanner::isAlphaNumeric(char c) { return isAlpha(c) || isDigit(c); }
 }
