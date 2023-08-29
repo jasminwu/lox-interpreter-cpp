@@ -1,3 +1,5 @@
+#include "color/colormod.hpp"
+
 // foreground colors
 auto static red_f = Color::Modifier(Color::FG_RED);
 auto static green_f = Color::Modifier(Color::FG_GREEN);
@@ -16,7 +18,6 @@ auto static green_b = Color::Modifier(Color::BG_GREEN);
 auto static blue_b = Color::Modifier(Color::BG_BLUE);
 auto static default_b = Color::Modifier(Color::BG_DEFAULT);
 auto static dgray_b = Color::Modifier(Color::BG_DARK_GRAY);
-
 
 // other formatting
 auto static reset = Color::Modifier(Color::RESET);

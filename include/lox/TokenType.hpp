@@ -34,7 +34,7 @@ namespace lox {
         AND,
         CLASS,
         ELSE,
-        FALSE,
+        TOKEN_FALSE,
         FUN,
         FOR,
         IF,
@@ -44,10 +44,10 @@ namespace lox {
         RETURN,
         SUPER,
         THIS,
-        TRUE,
+        TOKEN_TRUE,
         VAR,
         WHILE,
 
-        TokenEOF,
+        TOKEN_EOF,
     };
 }
