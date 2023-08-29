@@ -67,6 +67,14 @@ namespace lox {
          */
         char peek();
 
+        /**
+         * @brief We consume characters until we hit the " that ends the string.
+         * We also gracefully handle running out of input before the string is
+         * closed and report an error for that.
+         *
+         */
+        void string();
+
     public:
         /**
          * @brief Construct a new Scanner object

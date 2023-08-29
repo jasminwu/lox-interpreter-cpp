@@ -96,6 +96,9 @@ namespace lox {
         case '\n':
             line_++;
             break;
+        case '"':
+            string();
+            break;
         default:
             lox::Lox::error(line_, "Unexpected character.");
             break;
@@ -109,7 +112,7 @@ namespace lox {
     }
 
     void Scanner::addToken(lox::TokenType type, lox::Literal literal) {
-        std::string text = source_.substr(start_, current_ - start_ + 1);
+        std::string text = source_.substr(start_, current_ - start_);
 
         lox::Token current_token(type, text, literal, line_);
         tokens.push_back(current_token);
@@ -125,6 +128,28 @@ namespace lox {
     char Scanner::peek() {
         if (isAtEnd()) return '\0';
         return source_[current_];
+    }
+
+    void Scanner::string() {
+        while (peek() != '"' && !isAtEnd()) {
+            if (peek() == '\n') line_++;
+            advance();
+        }
+
+        if (isAtEnd()) {
+            Lox::error(line_, std::string("Unterminated string."));
+            return;
+        }
+
+        // The closing ".
+        advance();
+
+        // Trim the surrounding quotes.
+        int first_char = start_ + 1;
+        int last_char = current_ - 1;
+
+        std::string value = source_.substr(first_char, last_char - first_char);
+        addToken(lox::TokenType::STRING, value);
     }
 
 }
