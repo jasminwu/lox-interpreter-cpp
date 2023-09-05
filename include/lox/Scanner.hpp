@@ -57,7 +57,7 @@ namespace lox {
          * @param type
          */
         void addToken(lox::TokenType type);
-        void addToken(lox::TokenType type, lox::Literal literal);
+        void addToken(lox::TokenType type, lox::LiteralType literal);
 
         /**
          * @brief This method resembles conditional advance(). We only consume

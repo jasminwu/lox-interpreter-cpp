@@ -12,7 +12,7 @@ namespace lox {
     private:
         lox::TokenType type_;
         std::string lexeme_;
-        lox::Literal literal_;
+        lox::LiteralType literal_;
         int line_;
 
         std::unordered_map<lox::TokenType, std::string> tokenTypes_ = {
@@ -63,7 +63,7 @@ namespace lox {
          * @param literal
          * @return std::string
          */
-        std::string literalToString(const lox::Literal& literal);
+        std::string literalToString(const lox::LiteralType& literal);
         friend bool operator==(Token const a, Token const b);
         friend bool operator!=(Token const a, Token const b);
 
@@ -76,7 +76,7 @@ namespace lox {
          * @param literal
          * @param line
          */
-        Token(lox::TokenType type, std::string lexeme, lox::Literal literal,
+        Token(lox::TokenType type, std::string lexeme, lox::LiteralType literal,
               int line);
 
         /**

@@ -117,7 +117,7 @@ namespace lox {
         addToken(type, std::monostate());
     }
 
-    void Scanner::addToken(lox::TokenType type, lox::Literal literal) {
+    void Scanner::addToken(lox::TokenType type, lox::LiteralType literal) {
         std::string text = source_.substr(start_, current_ - start_);
 
         lox::Token current_token(type, text, literal, line_);

@@ -14,6 +14,7 @@ file(GLOB SOURCES
     src/Parser.cpp
     src/Scanner.cpp
     src/Token.cpp
+    src/Expr.cpp
 )
 
 file(GLOB TEST_SOURCES

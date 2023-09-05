@@ -1,11 +1,10 @@
 #pragma once
 
-#include <variant>
 #include <string>
+#include <variant>
 
-namespace lox
-{
+namespace lox {
 
-typedef std::variant<std::monostate, double, bool, std::string> Literal;
+    typedef std::variant<std::monostate, double, bool, std::string> LiteralType;
 
 }
