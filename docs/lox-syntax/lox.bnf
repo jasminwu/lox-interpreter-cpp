@@ -8,23 +8,17 @@ statement   ::= exprStmt | printStmt;
 exprStmt    ::= expression ";";
 printStmt   ::= "print" expression ";";
 
-# EXPRESSIONS
+# EXPRESSIONS V1
 expression  ::= literal | unary | binary | grouping;
-
 literal     ::= NUMBER | STRING | bool | nil;
 grouping    ::= "(" expression ")";
 unary       ::= operator_1 expression;
 binary      ::= expression operator_2 expression;
-
-# EXPRESSION TERMINALS
 bool        ::= "true" | "false";
 operator_1  ::= "-" | "!";
 operator_2  ::= "==" | "!=" | "<" | "<=" | ">" | ">=" | "+" | "-" | "*" | "/";
 
-#
-# NEW GRAMMAR TO HANDLE AMBIGUITY
-#
-
+## EXPRESSIONS V2 (to handle ambiguity)
 # LOWEST PRECEDENCE
 expression  ::= equality;
 equality    ::= comparison (("!=" | "==") comparison)*;
