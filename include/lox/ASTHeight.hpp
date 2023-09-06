@@ -3,11 +3,13 @@
 namespace lox
 {
 
-class ASTHeight : ExprVisitor<int> {
-    int visit(Binary &expr) override;
-    int visit(Unary &expr) override;
-    int visit(Literal &expr) override;
-    int visit(Grouping &expr) override;
+class ASTHeight : public ExprVisitor {
+public:
+    int h_;
+    void visit(Binary &expr) override;
+    void visit(Unary &expr) override;
+    void visit(Literal &expr) override;
+    void visit(Grouping &expr) override;
 };
 
 }

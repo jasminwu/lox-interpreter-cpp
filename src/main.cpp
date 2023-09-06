@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "lox/Lox.hpp"
+#include "lox/ASTHeight.hpp"
 
 // for pretty colors !!
 #include "color/color.hpp"
@@ -11,6 +12,9 @@ void printGreeting();
 int main(int argc, char **argv) {
     // SILLY TEXT PRINTING
     printGreeting();
+
+    // For Testing
+    
 
     // RUN THE PROGRAM
     if (argc > 2) {

@@ -1,29 +1,33 @@
+#include <algorithm>
+
 #include "lox/Expr.hpp"
 #include "lox/ASTHeight.hpp"
 
 namespace lox
 {
 
-int ASTHeight::visit(Binary &expr) {
-    auto visitor = ASTHeight();
-    return 1 + std::max(
-        expr.getLeftExpr()->accept(visitor),
-        expr.getRightExpr()->accept(visitor)
-    );
+void ASTHeight::visit(Binary &expr) {
+    ASTHeight l; 
+    expr.getLeftExpr()->accept(l);
+    ASTHeight r; 
+    expr.getRightExpr()->accept(r);
+    h_ = 1 + std::max(l.h_, r.h_); 
 }
 
-int ASTHeight::visit(Unary &expr) {
-    auto visitor = ASTHeight();
-    return 1 + expr.getRightExpr()->accept(visitor);
+void ASTHeight::visit(Unary &expr) {
+    ASTHeight r; 
+    expr.getRightExpr()->accept(r);
+    h_ = 1 + r.h_;
 }
 
-int ASTHeight::visit(Literal &expr) {
-    return 1;
+void ASTHeight::visit(Literal &expr) {
+    h_ = 1;
 }
 
-int ASTHeight::visit(Grouping &expr) {
-    auto visitor = ASTHeight();
-    return 1 + expr.getInnerExpr()->accept(visitor);
+void ASTHeight::visit(Grouping &expr) {
+    ASTHeight i; 
+    expr.getInnerExpr()->accept(i);
+    h_ = 1 + i.h_;
 }
 
 }
