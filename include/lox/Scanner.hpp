@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "Literal.hpp"
+#include "LiteralType.hpp"
 #include "Token.hpp"
 #include "TokenType.hpp"
 
@@ -57,7 +57,7 @@ namespace lox {
          * @param type
          */
         void addToken(lox::TokenType type);
-        void addToken(lox::TokenType type, lox::Literal literal);
+        void addToken(lox::TokenType type, lox::LiteralType literal);
 
         /**
          * @brief This method resembles conditional advance(). We only consume

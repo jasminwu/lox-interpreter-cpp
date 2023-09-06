@@ -8,11 +8,11 @@
 #include "lox/TokenType.hpp"
 
 namespace lox {
-    Token::Token(lox::TokenType type, std::string lexeme, lox::Literal literal,
-                 int line)
+    Token::Token(lox::TokenType type, std::string lexeme,
+                 lox::LiteralType literal, int line)
         : type_(type), lexeme_(lexeme), literal_(literal), line_(line){};
 
-    std::string Token::literalToString(const lox::Literal& literal) {
+    std::string Token::literalToString(const lox::LiteralType& literal) {
         std::ostringstream output_str_stream;
 
         std::visit(
