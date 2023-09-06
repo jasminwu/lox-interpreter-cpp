@@ -1,79 +1,127 @@
 #pragma once
 
 #include <variant>
+#include <memory>
 
 #include "lox/Token.hpp"
+#include "lox/ExprVisitor.hpp"
 
-namespace lox {
-    class Visitor;  // Forward declaration
 
-    // Forward declarations for Expr subclasses
-    class Binary;
-    class Grouping;
-    class Literal;
-    class Unary;
+namespace lox 
+{
 
-    class Expr {
-    public:
-        // Base class for expressions
-        virtual ~Expr() {
-        }  // Virtual destructor to ensure proper cleanup in derived classes
+// Forward declarations for Expr subclasses
+class Binary;
+class Grouping;
+class Literal;
+class Unary;
 
-        virtual void accept(Visitor& visitor) = 0;
+class Expr {
+public:
+    // constructor and destructor
+    Expr(
+        std::unique_ptr<Expr> leftExpr,
+        std::unique_ptr<Expr> rightExpr,
+        std::unique_ptr<Expr> innerExpr,
+        Token oper,
+        Token value
+    ) : 
+    leftExpr_(std::move(leftExpr)),
+    rightExpr_(std::move(rightExpr)),
+    innerExpr_(std::move(innerExpr)),
+    oper_(oper),
+    value_(value) {
+        leftExpr_ = std::move(leftExpr);
+        rightExpr_ = std::move(rightExpr);
+        innerExpr_ = std::move(innerExpr);
+        oper_ = oper;
+        value_ = value;
+    }
+
+    virtual ~Expr() {}
+
+    template<typename T>
+    virtual T accept(ExprVisitor<T> visitor);
+
+protected: 
+    std::unique_ptr<Expr> leftExpr_;
+    std::unique_ptr<Expr> rightExpr_;
+    std::unique_ptr<Expr> innerExpr_;
+    Token oper_;
+    Token value_; // literal or identifier
+};
+
+// Declare subclasses of Expr
+
+class Binary : public Expr {
+public:
+    Binary(std::unique_ptr<Expr> left, Token oper, std::unique_ptr<Expr> right);
+    // visitor acceptor
+    template<typename T>
+    T accept(ExprVisitor<T>& visitor) {
+        return visitor.visit(*this);
     };
 
-    class Visitor {
-    public:
-        virtual void visitBinaryExpr(const Binary& expr) = 0;
-        virtual void visitGroupingExpr(const Grouping& expr) = 0;
-        virtual void visitLiteralExpr(const Literal& expr) = 0;
-        virtual void visitUnaryExpr(const Unary& expr) = 0;
+    // getters and setters
+    virtual std::unique_ptr<Expr> getLeftExpr() {
+        return std::move(leftExpr_);
+    }
+    virtual std::unique_ptr<Expr> getRightExpr() {
+        return std::move(rightExpr_);
+    }
+    virtual Token getOper() {
+        return oper_;
+    }
+};
+
+class Unary : public Expr {
+public:
+    Unary(Token operator_name, std::unique_ptr<Expr> right);
+    // visitor acceptor
+    template<typename T>
+    T accept(ExprVisitor<T>& visitor) {
+        return visitor.visit(*this);
     };
 
-    class Binary : public Expr {
-    public:
-        Binary(Expr* left, lox::Token operatorToken, Expr* right);
+    // getters and setters
+    virtual std::unique_ptr<Expr> getRightExpr() {
+        return std::move(rightExpr_);
+    }
+    virtual Token getOper() {
+        return oper_;
+    }
+};
 
-        void accept(Visitor& visitor) override {
-            visitor.visitBinaryExpr(*this);
-        }
-
-        Expr* left_;
-        lox::Token operatorToken_;
-        Expr* right_;
+class Grouping : public Expr {
+public:
+    Grouping(std::unique_ptr<Expr> expr);
+    // visitor acceptor
+    template<typename T>
+    T accept(ExprVisitor<T>& visitor) {
+        return visitor.visit(*this);
     };
 
-    class Grouping : public Expr {
-    public:
-        Grouping(Expr& expression);
+    // getters and setters
+    virtual std::unique_ptr<Expr> getInnerExpr() {
+        return std::move(innerExpr_);
+    }
+};
 
-        void accept(Visitor& visitor) override {
-            visitor.visitGroupingExpr(*this);
-        }
-
-        Expr& expression_;
+class Literal : public Expr {
+public:
+    Literal(Token liter);
+    // visitor acceptor
+    template<typename T>
+    T accept(ExprVisitor<T>& visitor) {
+        return visitor.visit(*this);
     };
 
-    class Literal : public Expr {
-    public:
-        Literal(lox::LiteralType value);
+    // getters and setters
+    virtual Token getValue() {
+        return value_;
+    }
+};
 
-        void accept(Visitor& visitor) override {
-            visitor.visitLiteralExpr(*this);
-        }
-
-        lox::LiteralType value_;
-    };
-
-    class Unary : public Expr {
-    public:
-        Unary(Token operator_name, Expr& right);
-
-        void accept(Visitor& visitor) override {
-            visitor.visitUnaryExpr(*this);
-        }
-
-        Token operator_name_;
-        Expr& right_;
-    };
 }
+
+#include "Expr.tpp"

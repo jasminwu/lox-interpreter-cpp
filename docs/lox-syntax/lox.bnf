@@ -26,5 +26,5 @@ comparison  ::= term ((">" | ">=" | "<" | "<=") term)*;
 term        ::= factor (("-" | "+") factor)*;
 factor      ::= factor ("/" | "*") unary | unary; # left associative
 unary       ::= ("!" | "-") unary | primary;      # right associative
-primary     ::= NUMBER | STRING | "true" | "false" | "nul " | "(" expression ")";
+primary     ::= NUMBER | STRING | "true" | "false" | "nul " | "(" expression ")" | IDENTIFIER;
 # HIGHEST PRECEDENCE

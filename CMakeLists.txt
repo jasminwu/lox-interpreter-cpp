@@ -15,6 +15,7 @@ file(GLOB SOURCES
     src/Scanner.cpp
     src/Token.cpp
     src/Expr.cpp
+    src/ASTHeight.cpp
 )
 
 file(GLOB TEST_SOURCES

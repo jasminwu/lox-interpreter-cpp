@@ -68,6 +68,8 @@ namespace lox {
         friend bool operator!=(Token const a, Token const b);
 
     public:
+        Token();
+
         /**
          * @brief Construct a new Token object
          *

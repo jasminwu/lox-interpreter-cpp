@@ -163,21 +163,21 @@ A function that returns the height of the AST
 // idk if this works i literally learnt visitor pattern 30 mins ago
 // TEST THIS OUT
 class ASTHeight : public ExprVisitor<int> {
-     int visit(const Binary& expr) override {
-          auto visitor = ASTHeight();
+     int visit(Binary& expr) override {
+          auto visitorInstance = ASTHeight();
           return 1 + max(
                expr.getLeftExpr().accept(visitorInstance),
                expr.getRightExpr().accept(visitorInstance),
           );
      }
-     int visit(const Unary& expr) override {
+     int visit(Unary& expr) override {
           auto visitor = ASTHeight();
           return 1 + expr.getRightExpr().accept(visitorInstance);
      }
-     int visit(const Literal& expr) override {
+     int visit(Literal& expr) override {
           return 1;
      }
-     int visit(const Grouping& expr) override {
+     int visit(Grouping& expr) override {
           return 1 + expr.getInnerExpr().accept(visitorInstance);
      }
 };
