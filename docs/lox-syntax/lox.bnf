@@ -1,4 +1,5 @@
 # A REPRESENTATION OF LOX SYNTAX
+# AMBIGUOUS VERSION
 
 # STATEMENTS
 program     ::= statement* EOF;
@@ -19,3 +20,17 @@ binary      ::= expression operator_2 expression;
 bool        ::= "true" | "false";
 operator_1  ::= "-" | "!";
 operator_2  ::= "==" | "!=" | "<" | "<=" | ">" | ">=" | "+" | "-" | "*" | "/";
+
+#
+# NEW GRAMMAR TO HANDLE AMBIGUITY
+#
+
+# LOWEST PRECEDENCE
+expression  ::= equality;
+equality    ::= comparison (("!=" | "==") comparison)*;
+comparison  ::= term ((">" | ">=" | "<" | "<=") term)*;
+term        ::= factor (("-" | "+") factor)*;
+factor      ::= factor ("/" | "*") unary | unary; # left associative
+unary       ::= ("!" | "-") unary | primary;      # right associative
+primary     ::= NUMBER | STRING | "true" | "false" | "nul " | "(" expression ")";
+# HIGHEST PRECEDENCE
