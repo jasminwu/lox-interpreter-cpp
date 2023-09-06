@@ -1,6 +1,6 @@
 #include <string>
 
-#include "Expr.hpp"
+#include "lox/Expr.hpp"
 
 namespace lox {
     class AstPrinter {

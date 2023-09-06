@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "Literal.hpp"
+#include "LiteralType.hpp"
 #include "Token.hpp"
 #include "TokenType.hpp"
 

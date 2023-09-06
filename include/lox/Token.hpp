@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <variant>
 
-#include "lox/Literal.hpp"
+#include "lox/LiteralType.hpp"
 #include "lox/TokenType.hpp"
 
 namespace lox {
