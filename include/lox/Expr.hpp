@@ -49,11 +49,11 @@ public:
 class Binary : public Expr {
 private:
     std::shared_ptr<Expr> leftExpr_;
-    Token oper_;
+    Token operToken_;
     std::shared_ptr<Expr> rightExpr_;
 
 public:
-    Binary(std::shared_ptr<Expr> left, Token oper, std::shared_ptr<Expr> right);
+    Binary(std::shared_ptr<Expr> leftExpr, Token operToken, std::shared_ptr<Expr> rightExpr);
 
     // visitor acceptor
     void accept(ExprVisitor& visitor) override {
@@ -67,18 +67,18 @@ public:
     std::shared_ptr<Expr> getRightExpr() {
         return rightExpr_;
     }
-    Token getOper() {
-        return oper_;
+    Token getOperToken() {
+        return operToken_;
     }
 };
 
 class Unary : public Expr {
 private:
-    Token oper_;
+    Token operToken_;
     std::shared_ptr<Expr> rightExpr_;
     
 public:
-    Unary(Token operator_name, std::shared_ptr<Expr> right);
+    Unary(Token operToken, std::shared_ptr<Expr> rightExpr);
 
     // visitor acceptor
     void accept(ExprVisitor& visitor) override {
@@ -90,7 +90,7 @@ public:
         return rightExpr_;
     }
     Token getOper() {
-        return oper_;
+        return operToken_;
     }
 };
 
@@ -99,7 +99,7 @@ private:
     std::shared_ptr<Expr> innerExpr_;
     
 public:
-    Grouping(std::shared_ptr<Expr> expr);
+    Grouping(std::shared_ptr<Expr> innerExpr);
 
     // visitor acceptor
     void accept(ExprVisitor& visitor) override {
@@ -114,10 +114,10 @@ public:
 
 class Literal : public Expr {
 private:
-    Token value_;
+    Token literalToken_;
     
 public:
-    Literal(Token liter);
+    Literal(Token literalToken);
 
     // visitor acceptor
     void accept(ExprVisitor& visitor) override {
@@ -125,8 +125,8 @@ public:
     };
 
     // getters and setters
-    Token getValue() {
-        return value_;
+    Token getLiteralToken() {
+        return literalToken_;
     }
 };
 

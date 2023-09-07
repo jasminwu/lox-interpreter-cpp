@@ -9,12 +9,19 @@
 
 namespace lox {
 
-Token::Token():
-type_(TokenType::TOKEN_EOF), lexeme_(""), literal_(std::monostate()), line_(0) {}
+// default constructor
+Token::Token(
+) : type_(TokenType::TOKEN_EOF), lexeme_(""), literal_(std::monostate()), line_(0) {}
 
-Token::Token(lox::TokenType type, std::string lexeme,
-                lox::LiteralType literal, int line)
-    : type_(type), lexeme_(lexeme), literal_(literal), line_(line){};
+// constructor where you can initialise members
+Token::Token(
+    lox::TokenType type, 
+    std::string lexeme,
+    lox::LiteralType literal, 
+    int line
+) : type_(type), lexeme_(lexeme), literal_(literal), line_(line) {};
+
+// other methods
 
 std::string Token::literalToString(const lox::LiteralType& literal) {
     std::ostringstream output_str_stream;

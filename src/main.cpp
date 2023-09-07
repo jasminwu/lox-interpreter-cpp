@@ -16,20 +16,6 @@ int main(int argc, char **argv) {
     // SILLY TEXT PRINTING
     printGreeting();
 
-    // BEGIN RANDOM TEST ///////////////////////////
-    lox::Token hii = {lox::TokenType::STRING, "\"hello\"", "hello", 1};
-    lox::Token sex = {lox::TokenType::NUMBER, "69", (double) 69, 1};
-    lox::Token opp = {lox::TokenType::PLUS, "+", std::monostate(), 1};
-
-    auto left = std::make_shared<lox::Literal>(hii);
-    auto right = std::make_shared<lox::Literal>(sex);
-    auto root = std::make_shared<lox::Binary>(left, opp, right);
-
-
-
-    // END RANDOM TEST /////////////////////////////
-    
-
     // RUN THE PROGRAM
     if (argc > 2) {
         std::cerr << red_f << "Usage: app [script]\n" << white_f;

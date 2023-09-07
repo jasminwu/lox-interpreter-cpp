@@ -9,25 +9,25 @@ namespace lox
 
 // BINARY EXPRESSIONS
 Binary::Binary(
-    std::shared_ptr<Expr> left,
-    Token oper, 
-    std::shared_ptr<Expr> right
-) : leftExpr_(left), oper_(oper), rightExpr_(right) {}
+    std::shared_ptr<Expr> leftExpr,
+    Token operToken, 
+    std::shared_ptr<Expr> rightExpr
+) : leftExpr_(leftExpr), operToken_(operToken), rightExpr_(rightExpr) {}
 
 // UNARY EXPRESSIONS
 Unary::Unary(
-    Token oper, 
-    std::shared_ptr<Expr> right
-) : oper_(oper), rightExpr_(right) {}
+    Token operToken, 
+    std::shared_ptr<Expr> rightExpr
+) : operToken_(operToken), rightExpr_(rightExpr) {}
 
 // GROUPING EXPRESSIONS
 Grouping::Grouping(
-    std::shared_ptr<Expr> expr
-) : innerExpr_(expr) {}
+    std::shared_ptr<Expr> innerExpr
+) : innerExpr_(innerExpr) {}
 
 // LITERAL EXPRESSIONS
 Literal::Literal(
-    Token literal
-) : value_(literal) {}
+    Token literalToken
+) : literalToken_(literalToken) {}
 
 }

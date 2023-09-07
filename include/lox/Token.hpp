@@ -68,6 +68,7 @@ namespace lox {
         friend bool operator!=(Token const a, Token const b);
 
     public:
+        // makes a dummy token
         Token();
 
         /**
