@@ -23,7 +23,23 @@ namespace lox {
             Token operator_name = previous();
             std::shared_ptr<Expr> right = comparison();
 
-            *expr = Expr.Binary(expr, operator_name, right);
+            *expr = Binary(expr, operator_name, right);
+        }
+
+        return expr;
+    }
+
+    std::shared_ptr<Expr> Parser::term() {
+        std::shared_ptr<Expr> expr = factor();
+
+        auto types =
+            std::vector<TokenType>({TokenType::MINUS, TokenType::PLUS});
+
+        while (match(types)) {
+            Token operator_name = previous();
+            std::shared_ptr<Expr> right = factor();
+
+            *expr = Binary(expr, operator_name, right);
         }
 
         return expr;
@@ -42,7 +58,7 @@ namespace lox {
 
     bool Parser::check(TokenType type) {
         if (isAtEnd()) return false;
-        return peek().type_ == type;
+        return peek().getTokenType() == type;
     }
 
     Token Parser::advance() {
@@ -50,11 +66,13 @@ namespace lox {
         return previous();
     }
 
-    bool Parser::isAtEnd() { return peek().type_ == TokenType::TOKEN_EOF; }
+    bool Parser::isAtEnd() {
+        return peek().getTokenType() == TokenType::TOKEN_EOF;
+    }
 
-    Token Parser::peek() { return tokens_.get(current_); }
+    Token Parser::peek() { return *current_; }
 
-    Token Parser::previous() { return tokens.get(current_ - 1); }
+    Token Parser::previous() { return *(current_ - 1); }
 
     std::shared_ptr<Expr> Parser::comparison() {
         std::shared_ptr<Expr> expr = term();
@@ -66,57 +84,11 @@ namespace lox {
         while (match(types)) {
             Token operator_name = previous();
             std::shared_ptr<Expr> right = term();
-            *expr = Expr.Binary(expr, operator_name, right);
+            *expr = Binary(expr, operator_name, right);
         }
 
         return expr;
     }
 
-    std::shared_ptr<Expr> Parser::factor() {
-        Expr expr = unary();
-
-        auto types =
-            std::vector<TokenType>({TokenType::SLASH, TokenType::STAR});
-
-        while (match(types)) {
-            Token operator_name = previous();
-            Expr right = unary();
-            expr = Expr.Binary(expr, operator_name, right);
-        }
-
-        return expr;
-    }
-
-    std::shared_ptr<Expr> Parser::unary() {
-        auto types =
-            std::vector<TokenType>({TokenType::BANG, TokenType::MINUS});
-
-        if (match(types)) {
-            Token operator_name = previous();
-            Expr right = unary();
-            return Expr.Unary(operator_name, right);
-        }
-
-        return primary();
-    }
-
-    std::shared_ptr<Expr> Parser::primary() {
-        if (match(std::vector<TokenType>({TokenType::TOKEN_FALSE})))
-            return Expr.Literal(false);
-        if (match(std::vector<TokenType>({TokenType::TOKEN_TRUE})))
-            return Expr.Literal(true);
-        if (match(std::vector<TokenType>({TokenType::NIL})))
-            return Expr.Literal(null);
-
-        if (match(std::vector<TokenType>(
-                {TokenType::NUMBER, TokenType::STRING}))) {
-            return Expr.Literal(previous().literal);
-        }
-
-        if (match((std::vector<TokenType>({TokenType::LEFT_PAREN}))) {
-            Expr expr = expression();
-            consume(RIGHT_PAREN, "Expect ')' after expression.");
-            return Expr.Grouping(expr);
-        }
-    }
+    std::shared_ptr<Expr> Parser::factor() { return NULL; };  // TODO
 }

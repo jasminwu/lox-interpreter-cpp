@@ -89,5 +89,12 @@ namespace lox {
          * @return std::string
          */
         std::string toString();
+
+        /**
+         * @brief Get the Token Type object
+         *
+         * @return lox::TokenType
+         */
+        lox::TokenType getTokenType();
     };
 }

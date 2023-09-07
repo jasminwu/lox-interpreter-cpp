@@ -8,8 +8,8 @@ namespace lox {
 
     class Parser {
     private:
-        std::vector<Token> tokens_;
-        int current_ = 0;
+        std::vector<lox::Token> tokens_;             // list of tokens
+        std::vector<lox::Token>::iterator current_;  // iterator on list
 
         /**
          * @brief This method basically expands to the equality rule
@@ -27,9 +27,16 @@ namespace lox {
         std::shared_ptr<Expr> equality();
 
         /**
-         * @brief Checks to see if the current token has any of the given types.
-         * If so, it consumes the token and returns true. Otherwise, it returns
-         * false and leaves the current token alone.
+         * @brief For addition and subtraction
+         *
+         * @return std::shared_ptr<Expr>
+         */
+        std::shared_ptr<Expr> term();
+
+        /**
+         * @brief Checks to see if the current token has any of the given
+         * types. If so, it consumes the token and returns true. Otherwise,
+         * it returns false and leaves the current token alone.
          *
          * @param types
          * @return true
