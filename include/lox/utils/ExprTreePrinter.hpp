@@ -1,11 +1,11 @@
+#include <string>
+
 #include "lox/Expr.hpp"
 
-namespace lox
-{
+namespace lox {
 
-class ASTHeight : public ExprVisitor {
+class ExprTreePrinter : public ExprVisitor {
 public:
-    int h_;
     void visit(Binary &expr) override;
     void visit(Unary &expr) override;
     void visit(Literal &expr) override;

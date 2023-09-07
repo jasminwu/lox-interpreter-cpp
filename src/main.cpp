@@ -3,8 +3,10 @@
 #include <variant>
 
 #include "lox/Lox.hpp"
-#include "lox/ASTHeight.hpp"
 #include "lox/Expr.hpp"
+
+// PROD: DELETE THIS LINE
+#include "lox/utils/ExprTreeHeight.hpp"
 
 // for pretty colors !!
 #include "color/color.hpp"
