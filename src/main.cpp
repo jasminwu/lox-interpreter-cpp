@@ -1,6 +1,10 @@
 #include <iostream>
+#include <memory>
+#include <variant>
 
 #include "lox/Lox.hpp"
+#include "lox/ASTHeight.hpp"
+#include "lox/Expr.hpp"
 
 // for pretty colors !!
 #include "color/color.hpp"

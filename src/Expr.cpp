@@ -1,13 +1,32 @@
+#include <memory>
+
 #include "lox/Expr.hpp"
+#include "lox/Token.hpp"
 
-namespace lox {
-    Binary::Binary(Expr* left, lox::Token operatorToken, Expr* right)
-        : left_(left), operatorToken_(operatorToken), right_(right) {}
+namespace lox 
+{
 
-    Grouping::Grouping(Expr& expression) : expression_(expression){};
+// BINARY EXPRESSIONS
+Binary::Binary(
+    std::shared_ptr<Expr> leftExpr,
+    Token operToken, 
+    std::shared_ptr<Expr> rightExpr
+) : leftExpr_(leftExpr), operToken_(operToken), rightExpr_(rightExpr) {}
 
-    Literal::Literal(lox::LiteralType value) : value_(value) {}
+// UNARY EXPRESSIONS
+Unary::Unary(
+    Token operToken, 
+    std::shared_ptr<Expr> rightExpr
+) : operToken_(operToken), rightExpr_(rightExpr) {}
 
-    Unary::Unary(Token operator_name, Expr& right)
-        : operator_name_(operator_name), right_(right) {}
+// GROUPING EXPRESSIONS
+Grouping::Grouping(
+    std::shared_ptr<Expr> innerExpr
+) : innerExpr_(innerExpr) {}
+
+// LITERAL EXPRESSIONS
+Literal::Literal(
+    Token literalToken
+) : literalToken_(literalToken) {}
+
 }
