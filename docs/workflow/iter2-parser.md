@@ -3,18 +3,12 @@ In this iteration we will implement the classes for the AST, and also start with
 
 In this iteration we will only handle Expr parsing. We will leave Stmts till later.
 
+**References**
+```
+https://www.youtube.com/watch?v=SToUyjAsaFk&t=1253s
 
-## The Lox Grammar for Expressions
-```cpp
-//# LOWEST PRECEDENCE
-expression  ::= equality;
-equality    ::= comparison (("!=" | "==") comparison)*;
-comparison  ::= term ((">" | ">=" | "<" | "<=") term)*;
-term        ::= factor (("-" | "+") factor)*;
-factor      ::= factor ("/" | "*") unary | unary; # left associative
-unary       ::= ("!" | "-") unary | primary;      # right associative
-primary     ::= NUMBER | STRING | "true" | "false" | "nul " | "(" expression ")" | IDENTIFIER;
-//# HIGHEST PRECEDENCE
+Crafting Interpretors:
+6.1, 6.2
 
 ```
 
@@ -54,7 +48,7 @@ class Literal : public Expr;
 ```
 All objects instantiated from these classes are nodes in the AST.
 
-## Visitors
+### Visitors
 Everytime we want to make a new function that we can call on any type of expression, we implement this ExprVisitor interface with a certain additional member variable.
 
 ```cpp
@@ -74,7 +68,7 @@ Eventually we will be making another type of visitor interface, a StmtVisitor.
 
 The interpreter will contain a visitor implementation which inherits from both the ExprVisitor and StmtVisitor interfaces.
 
-#### Example Implementation of the ExprVisitor
+### Example Implementation of the ExprVisitor
 This is an implementation of a Visitor which allows you to calculate the height of an AST.
 ```cpp
 class ASTHeight : public ExprVisitor {
@@ -123,6 +117,20 @@ std::cout << anothervisitor.h_ << std::endl; // returns 1 (height of a single li
 
 ## Recursive Descent Parsing
 
+### The Lox Grammar for Expressions
+```cpp
+//# LOWEST PRECEDENCE
+expression  ::= equality;
+equality    ::= comparison (("!=" | "==") comparison)*;
+comparison  ::= term ((">" | ">=" | "<" | "<=") term)*;
+term        ::= factor (("-" | "+") factor)*;
+factor      ::= factor ("/" | "*") unary | unary; # left associative
+unary       ::= ("!" | "-") unary | primary;      # right associative
+primary     ::= NUMBER | STRING | "true" | "false" | "nul " | "(" expression ")" | IDENTIFIER;
+//# HIGHEST PRECEDENCE
+
+```
+
 ### The Parser Class
 The parser class contains a list of Tokens (provided by the scanner). It iterates through the list.
 ```cpp
@@ -138,9 +146,23 @@ The parser will contain several recursive methods.
 
 Each of these methods returns an AST node (Expr object).
 
+The recursive methods of the Parser class are:
+```cpp
+    lox::Expr expression();     // parses an expression or equality or term or factor or unary or primary
+    lox::Expr equality();       // parses an equality or term or factor or unary or primary
+    lox::Expr term();           // parses a term or factor or unary or primary
+    lox::Expr factor();         // parses a factor or unary or primary
+    lox::Expr unary();          // parses a unary or primary
+    lox::Expr primary();        // parses a primary
+```
 
+Parsing any list of Tokens just involves calling the `expression()` method on the list.
+```cpp
+auto ParserInstance = lox::Parser(tokens); // tokens is a list of tokens (returned by the scanner)
+auto ASTRoot = ParserInstance.expression();
+```
 
-
+We can deal with Error handling next iteration.
 
 ## File Organisation
 Both declarations of Expr and ExprVisitor are stored in `Expr.hpp`
