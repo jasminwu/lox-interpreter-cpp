@@ -26,34 +26,6 @@ public:
 
 // expression interface
 class Expr {
-public:
-    // constructor and destructor
-    Expr(
-        std::shared_ptr<Expr> leftExpr,
-        std::shared_ptr<Expr> rightExpr,
-        std::shared_ptr<Expr> innerExpr,
-        Token oper,
-        Token value,
-        ExprType type
-    ) : 
-    leftExpr_(leftExpr),
-    rightExpr_(rightExpr),
-    innerExpr_(innerExpr),
-    oper_(oper),
-    value_(value),
-    type_(type) {
-        leftExpr_ = leftExpr;
-        rightExpr_ = rightExpr;
-        innerExpr_ = innerExpr;
-        oper_ = oper;
-        value_ = value;
-        type_ = type;
-    }
-
-    virtual ~Expr() {}
-
-    virtual void accept(ExprVisitor& visitor) = 0;
-
 protected: 
     std::shared_ptr<Expr> leftExpr_;
     std::shared_ptr<Expr> rightExpr_;
@@ -61,13 +33,28 @@ protected:
     Token oper_;
     Token value_; // literal or identifier
     ExprType type_;
+
+public:
+    // constructor and destructor
+    Expr() {}
+
+    virtual ~Expr() {}
+
+    virtual void accept(ExprVisitor& visitor) = 0;
+
 };
 
 // Declare subclasses of Expr
 
 class Binary : public Expr {
+private:
+    std::shared_ptr<Expr> leftExpr_;
+    Token oper_;
+    std::shared_ptr<Expr> rightExpr_;
+
 public:
     Binary(std::shared_ptr<Expr> left, Token oper, std::shared_ptr<Expr> right);
+
     // visitor acceptor
     void accept(ExprVisitor& visitor) override {
         return visitor.visit(*this);
@@ -86,6 +73,10 @@ public:
 };
 
 class Unary : public Expr {
+private:
+    Token oper_;
+    std::shared_ptr<Expr> rightExpr_;
+    
 public:
     Unary(Token operator_name, std::shared_ptr<Expr> right);
 
@@ -104,6 +95,9 @@ public:
 };
 
 class Grouping : public Expr {
+private:
+    std::shared_ptr<Expr> innerExpr_;
+    
 public:
     Grouping(std::shared_ptr<Expr> expr);
 
@@ -119,6 +113,9 @@ public:
 };
 
 class Literal : public Expr {
+private:
+    Token value_;
+    
 public:
     Literal(Token liter);
 

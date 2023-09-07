@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 
     auto left = std::make_shared<lox::Literal>(hii);
     auto right = std::make_shared<lox::Literal>(sex);
-    auto root = std::make_shared<lox::Binary>(hii, sex, opp);
+    auto root = std::make_shared<lox::Binary>(left, opp, right);
 
 
 
