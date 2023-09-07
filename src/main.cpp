@@ -1,7 +1,10 @@
 #include <iostream>
+#include <memory>
+#include <variant>
 
 #include "lox/Lox.hpp"
 #include "lox/ASTHeight.hpp"
+#include "lox/Expr.hpp"
 
 // for pretty colors !!
 #include "color/color.hpp"
@@ -13,7 +16,18 @@ int main(int argc, char **argv) {
     // SILLY TEXT PRINTING
     printGreeting();
 
-    // For Testing
+    // BEGIN RANDOM TEST ///////////////////////////
+    lox::Token hii = {lox::TokenType::STRING, "\"hello\"", "hello", 1};
+    lox::Token sex = {lox::TokenType::NUMBER, "69", (double) 69, 1};
+    lox::Token opp = {lox::TokenType::PLUS, "+", std::monostate(), 1};
+
+    auto left = std::make_shared<lox::Literal>(hii);
+    auto right = std::make_shared<lox::Literal>(sex);
+    auto root = std::make_shared<lox::Binary>(hii, sex, opp);
+
+
+
+    // END RANDOM TEST /////////////////////////////
     
 
     // RUN THE PROGRAM
