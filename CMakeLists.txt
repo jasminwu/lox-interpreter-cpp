@@ -15,7 +15,11 @@ file(GLOB SOURCES
     src/Scanner.cpp
     src/Token.cpp
     src/Expr.cpp
-    src/ASTHeight.cpp
+)
+
+file(GLOB UTIL_SOURCES
+    src/utils/ExprTreeHeight.cpp 
+    src/utils/ExprTreePrinter.cpp
 )
 
 file(GLOB TEST_SOURCES
@@ -31,6 +35,7 @@ file(GLOB TEST_SOURCES
 # Create the main executable
 add_executable(app
     ${SOURCES}
+    ${UTIL_SOURCES}
     src/main.cpp
 )
 # TESTING 
@@ -38,6 +43,7 @@ enable_testing()
 # Test Executable
 add_executable(testapp
     ${SOURCES}
+    ${UTIL_SOURCES}
     ${TEST_SOURCES}
 )
 add_test(NAME COMPLETE_TEST COMMAND testapp)
