@@ -1,7 +1,6 @@
 #include <memory>
 
 #include "lox/Expr.hpp"
-#include "lox/ExprType.hpp"
 #include "lox/Token.hpp"
 
 namespace lox 

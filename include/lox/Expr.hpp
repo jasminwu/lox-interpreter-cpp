@@ -4,7 +4,6 @@
 #include <memory>
 
 #include "lox/Token.hpp"
-#include "lox/ExprType.hpp"
 
 namespace lox 
 {
@@ -26,14 +25,6 @@ public:
 
 // expression interface
 class Expr {
-protected: 
-    std::shared_ptr<Expr> leftExpr_;
-    std::shared_ptr<Expr> rightExpr_;
-    std::shared_ptr<Expr> innerExpr_;
-    Token oper_;
-    Token value_; // literal or identifier
-    ExprType type_;
-
 public:
     // constructor and destructor
     Expr() {}

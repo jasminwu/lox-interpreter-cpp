@@ -1,7 +1,22 @@
 # Iteration 2 Overview
 In this iteration we will implement the classes for the AST, and also start with using recursive descent parsing in order to parse our lexemes into an AST.
 
-We will be using the Visitor Pattern to traverse the tree.
+In this iteration we will only handle Expr parsing. We will leave Stmts till later.
+
+
+## The Lox Grammar for Expressions
+```cpp
+//# LOWEST PRECEDENCE
+expression  ::= equality;
+equality    ::= comparison (("!=" | "==") comparison)*;
+comparison  ::= term ((">" | ">=" | "<" | "<=") term)*;
+term        ::= factor (("-" | "+") factor)*;
+factor      ::= factor ("/" | "*") unary | unary; # left associative
+unary       ::= ("!" | "-") unary | primary;      # right associative
+primary     ::= NUMBER | STRING | "true" | "false" | "nul " | "(" expression ")" | IDENTIFIER;
+//# HIGHEST PRECEDENCE
+
+```
 
 ## Expr Class and ExprVisitor
 ```cpp
@@ -80,5 +95,36 @@ right->accept(anothervisitor);
 std::cout << anothervisitor.h_ << std::endl; // returns 1 (height of a single literal)
 ```
 
-### File Organisation
-We won't be using templates
+## Recursive Descent Parsing
+
+## File Organisation
+Both declarations of Expr and ExprVisitor are stored in `Expr.hpp`
+
+```
+lox-interpreter-cpp
+├─── src                           (contains class implementations and main)
+│    ├── main.cpp                  ** entry point **
+│    ├── Token.cpp              
+│    ├── Scanner.cpp
+│    ├── Expr.cpp       [CONTAINS IMPLS OF CNCRT DRVED CLASSES OF EXPR]
+│    ├── ASTHeight.cpp  [CONTAINS IMPL OF EXAMPLE EXPRVSTR]
+│    └── Parser.cpp
+├─── include
+│    └── lox                       (contains class declarations)
+│        ├── Token.hpp
+│        ├── TokenType.hpp         *just a very basic enum class*
+│        ├── Scanner.hpp        
+│        ├── Expr.hpp       [DECL OF ABS & CNCRT EXPR AND ABS EXPRVSTR CLASSES]
+│        ├── ASTVHeight.hpp [DECL OF EXAMPLE EXPRVSTR]
+│        ├── Scanner.hpp        
+│        └── Parser.hpp
+└─── test
+     ├── catch2                    (testing framework)
+     │   └── catch.hpp
+     ├── testutils                 (utility functions for testing)
+     │   └── utils.hpp             
+     ├── tests_main.cpp            (entry point for tests)
+     ├── Lox_test.cpp
+     ├── Scanner_test.cpp
+     └── Parser_test.cpp
+```
