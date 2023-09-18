@@ -87,6 +87,15 @@ namespace lox {
         Token previous();
 
         /**
+         * @brief Checks if the current token matches
+         * If it matches, then advances the current token
+         * Else, throw error with the error message
+         */
+        Token consume(std::vector<TokenType> types, std::string error_msg);
+
+        // RECURSIVE DESCENT PARSING FUNCTIONS
+
+        /**
          * @brief Used for any comparisons present in the code. Stores an
          * expression that contains LHS, operator, and RHS
          *
