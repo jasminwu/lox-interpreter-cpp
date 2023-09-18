@@ -20,6 +20,7 @@ file(GLOB SOURCES
 file(GLOB UTIL_SOURCES
     src/utils/ExprTreeHeight.cpp 
     src/utils/ExprTreePrinter.cpp
+    src/utils/ExprTreeSize.cpp
 )
 
 file(GLOB TEST_SOURCES
